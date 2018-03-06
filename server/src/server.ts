@@ -122,23 +122,24 @@ function setMachineEnv(machine: string): Thenable<string> {
 		if (machine.length === 0) {
 			resolve(machine);
 		} else {
-			exec(`docker-machine env ${machine} --shell bash`, function (error, stdout, stderr) {
-				if (error) {
-					let errString = stderr.toString();
-					connection.window.showErrorMessage(`Could not get docker-machine environment: '${errString}'`);
-					reject(machine);
-				}
+			resolve("Yeah")
+			// exec(`docker-machine env ${machine} --shell bash`, function (error, stdout, stderr) {
+			// 	if (error) {
+			// 		let errString = stderr.toString();
+			// 		connection.window.showErrorMessage(`Could not get docker-machine environment: '${errString}'`);
+			// 		reject(machine);
+			// 	}
 
-				let out = stdout.toString();
-				let envRegex = /export (.+)="(.+)"\n/g;
+			// 	let out = stdout.toString();
+			// 	let envRegex = /export (.+)="(.+)"\n/g;
 
-				let match: RegExpExecArray;
-				while (match = envRegex.exec(out)) {
-					process.env[match[1]] = match[2];
-				}
+			// 	let match: RegExpExecArray;
+			// 	while (match = envRegex.exec(out)) {
+			// 		process.env[match[1]] = match[2];
+			// 	}
 
-				resolve(machine);
-			});
+			// 	resolve(machine);
+			// });
 		}
 	});
 }
